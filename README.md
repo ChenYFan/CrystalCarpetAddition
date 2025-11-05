@@ -1,41 +1,43 @@
-## Crystal Carpet Additon
-[![GitHub License](https://img.shields.io/github/license/Crystal0404/CrystalCarpetAddition)]()
-[![Modrinth Downloads](https://img.shields.io/modrinth/dt/G26sLP13?logo=Modrinth&label=Modrinth)](https://modrinth.com/mod/crystalcarpetaddition)
-[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Crystal0404/CrystalCarpetAddition?color=blue)]()
+## Crystal Carpet Addition CyanEdition
 
-  *中文* / [English](https://github.com/Crystal0404/CrystalCarpetAddition/blob/master/README_EN_US.md) 
+> [!NOTE]
+> 
+> 这是一个CyanFalse修改的Crystal Carpet Addition模组，用于自己的Nyirusu Minecraft Server系列。
 
-  > [!NOTE]
-  > 
-  > CCA已进入维护模式. 除了更新至最新的Minecraft版本外, 仅修复Bug, 不添加新功能.
 
-  *经过数次跳票，终于做出来了!*
+## 已做的修改如下
 
-  这是一个Carpet的拓展, 包含一些有趣的功能, 默认所有规则设置均与Minecraft原版一致, 不会产生任何变化与影响
+### `GatewayCannotLoadingChunks` 规则
 
-  **我使用了自己的SettingManager管理规则, 使用方法与Carpet基本相同,你只需要用```/cca```代替```/carpet```即可, 规则保存在```cca.conf```中**
+类型：~`Boolean`~ `String`
+可选值: `None`, `All`, `Minecraft允许的Entity Type（例如Player、Item、Villager）`
+默认值: `None` （允许所有实体创建加载票）
 
-  **操作命令是```/cca``` 不是 ```/carpet```**
+> 在24w21a，Mojang引入了`实体穿越折跃门时会在目标区块创建加载票`的功能。
+>
+> 这***意外的***（？）导致了虚空交易被彻底削弱。如果尝试在该版本中虚空交易（启用RemoveVillagerTradeDistanceLimit规则），在第二次离开村民所在区块时，若距离第一次返回事件不超过15s，会导致村民所在区块会在实际上被加载，导致虚空交易失效。
+>
+> CCA原本的规则是`GatewayCannotLoadingChunks`，可以阻止实体穿越折跃门时创建加载票。
+>
+> 但这条规则是一刀切的，会导致折跃门加载器无法使用。
+>
+> 因此我将这条规则改为`String`类型，可以指定阻止哪些实体创建加载票。
+>
+> 例如，设置为`Player`，可以在玩家通过时阻止折跃门创建加载票（PS：当然这不能避免Player加载票 PSS：但是Player加载票在Player离开时就会销毁，不会多赖15s）
+>
+> 设置为`Item`，可以在物品通过时阻止折跃门创建加载票
+>
+> 设置为`None`，则允许所有实体创建加载票（和原本关闭该规则效果相同）
+>
+> 设置为`All`，则和原本的Boolean规则效果相同，阻止所有实体创建加载票。
+>
+> 你也可以用逗号拼接多个实体名，例如`Player,Item`，则玩家和物品通过时均不会创建加载票。
 
-  **规则列表等更多信息请查阅[CCA文档](https://crystal0404.github.io/cca-doc)**
 
-## 依赖库
+## Contributions
 
-| 依赖         | 类型 | 环境        | 链接                                                                                                 |
-|------------|----|-----------|----------------------------------------------------------------------------------------------------|
-| Carpet     | 必选 | 客户端 / 服务端 | [Github](https://github.com/gnembon/fabric-carpet) / [Modrinth](https://modrinth.com/mod/carpet)   |
+Original mod by Crystal0404:[Crystal Carpet Additon](https://github.com/Crystal0404/CrystalCarpetAddition)
 
-**注: v1.10.0以前CCANetworkProtocol规则通过`fabric-api`进行网络通信, 因此在小于1.10.0的版本中需要安装`fabric-api`, 此规则于v1.10.0中移除, 因此在大于v1.10.0版本中不再需要`fabric-api`**
+## License
 
-*[点我前往fabric-api的Modrinth下载页面](https://modrinth.com/mod/fabric-api)*
-
-## 支持版本
-不受支持版本的issues会无条件直接关闭, 它会随时更新!
-
-详细请查阅[EOL](https://crystal0404.github.io/cca-doc/eol/)
-
-## 其他
-  
-  不会有Minecraft1.19.4以下的版本, 至少暂时是这样的
-  
-  使用了Yarn混淆映射表来反混淆Minecarft
+GPLv3

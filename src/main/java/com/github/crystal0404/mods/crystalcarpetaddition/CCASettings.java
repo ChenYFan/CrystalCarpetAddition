@@ -51,7 +51,7 @@ public class CCASettings {
     public static boolean EndermanCannotPickUpBlocksInNether = false;
 
     @Rule(categories = {CCA, MC_TWEAKS})
-    public static boolean GatewayCannotLoadingChunks = false;
+    public static String GatewayCannotLoadingChunks = "None";
 
     @Rule(categories = {CCA, MC_TWEAKS})
     @Restriction(

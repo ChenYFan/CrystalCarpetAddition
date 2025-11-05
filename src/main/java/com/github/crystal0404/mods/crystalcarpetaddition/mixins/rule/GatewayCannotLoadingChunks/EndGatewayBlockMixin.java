@@ -23,27 +23,53 @@ package com.github.crystal0404.mods.crystalcarpetaddition.mixins.rule.GatewayCan
 import com.github.crystal0404.mods.crystalcarpetaddition.CCASettings;
 import net.minecraft.block.EndGatewayBlock;
 import net.minecraft.world.TeleportTarget;
+
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(EndGatewayBlock.class)
 public abstract class EndGatewayBlockMixin {
-    @ModifyArg(
-            method = "createTeleportTarget",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/TeleportTarget;" +
-                            "<init>(Lnet/minecraft/server/world/ServerWorld;" +
-                            "Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;" +
-                            "FFLjava/util/Set;Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;)V",
-                    ordinal = 1
-            ),
-            index = 6
-    )
-    private TeleportTarget.PostDimensionTransition createTeleportTargetMixin(
-            TeleportTarget.PostDimensionTransition original
-    ) {
-        return CCASettings.GatewayCannotLoadingChunks ? TeleportTarget.NO_OP : original;
-    }
+        @ModifyArg(method = "createTeleportTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/TeleportTarget;"
+                        +
+                        "<init>(Lnet/minecraft/server/world/ServerWorld;" +
+                        "Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;" +
+                        "FFLjava/util/Set;Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;)V", ordinal = 1), index = 6)
+        private TeleportTarget.PostDimensionTransition createTeleportTargetMixin(
+                        TeleportTarget.PostDimensionTransition original) {
+
+                // return CCASettings.GatewayCannotLoadingChunks ? TeleportTarget.NO_OP :
+                // original;
+
+                return entity -> {
+                        if (entity != null) {
+                                String EntityType = entity.getType().getName().getString();
+                                String[] DisallowedEntityType = CCASettings.GatewayCannotLoadingChunks.split(",");
+                                // if (CCASettings.GatewayCannotLoadingChunks.contains(EntityType)
+                                // || CCASettings.GatewayCannotLoadingChunks.equals("All")
+                                // || CCASettings.GatewayCannotLoadingChunks.equals("true")) {
+                                // TeleportTarget.NO_OP.onTransition(entity);
+                                // return;
+                                // }
+                                if (DisallowedEntityType.length > 0) {
+                                        for (String type : DisallowedEntityType) {
+                                                if (type.equalsIgnoreCase("None")
+                                                                || type.equals("false")) {
+                                                        original.onTransition(entity);
+                                                        return;
+                                                }
+                                                if (type.equalsIgnoreCase(EntityType)
+                                                                || type.equalsIgnoreCase("All")
+                                                                || type.equals("true")) {
+                                                        TeleportTarget.NO_OP.onTransition(entity);
+                                                        return;
+                                                }
+                                        }
+                                }
+                        }
+                        original.onTransition(entity);
+                };
+        }
 }
