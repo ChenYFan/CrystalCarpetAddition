@@ -10,7 +10,9 @@
 ### `GatewayCannotLoadingChunks` 规则
 
 类型：~`Boolean`~ `String`
+
 可选值: `None`, `All`, `Minecraft允许的Entity Type（例如Player、Item、Villager）`
+
 默认值: `None` （允许所有实体创建加载票）
 
 > 在24w21a，Mojang引入了`实体穿越折跃门时会在目标区块创建加载票`的功能。

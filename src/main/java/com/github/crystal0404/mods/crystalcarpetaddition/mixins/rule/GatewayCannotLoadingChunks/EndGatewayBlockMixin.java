@@ -47,12 +47,6 @@ public abstract class EndGatewayBlockMixin {
                         if (entity != null) {
                                 String EntityType = entity.getType().getName().getString();
                                 String[] DisallowedEntityType = CCASettings.GatewayCannotLoadingChunks.split(",");
-                                // if (CCASettings.GatewayCannotLoadingChunks.contains(EntityType)
-                                // || CCASettings.GatewayCannotLoadingChunks.equals("All")
-                                // || CCASettings.GatewayCannotLoadingChunks.equals("true")) {
-                                // TeleportTarget.NO_OP.onTransition(entity);
-                                // return;
-                                // }
                                 if (DisallowedEntityType.length > 0) {
                                         for (String type : DisallowedEntityType) {
                                                 if (type.equalsIgnoreCase("None")
