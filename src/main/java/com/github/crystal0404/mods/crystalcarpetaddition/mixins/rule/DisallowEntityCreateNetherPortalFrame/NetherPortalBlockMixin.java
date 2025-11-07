@@ -52,24 +52,16 @@ public abstract class NetherPortalBlockMixin {
             return;
         }
 
-        String settingValue = CCASettings.DisallowEntityCreateNetherPortalFrame.trim();
-        
-        // Handle special cases first
-        if (settingValue.equalsIgnoreCase("None") || settingValue.equalsIgnoreCase("false")) {
-            return; // Rule is disabled, allow portal creation
-        }
-        
-        if (settingValue.equalsIgnoreCase("All") || settingValue.equalsIgnoreCase("true")) {
-            cir.setReturnValue(TeleportTarget.NO_OP); // Block all entities
-            return;
-        }
-
-        // Check if entity type matches any in the comma-separated list
         String entityTypeName = entity.getType().getName().getString();
-        String[] disallowedEntityTypes = settingValue.split(",");
+        String[] disallowedEntityTypes = CCASettings.DisallowEntityCreateNetherPortalFrame.split(",");
 
         for (String type : disallowedEntityTypes) {
-            if (type.trim().equalsIgnoreCase(entityTypeName)) {
+            if (type.equalsIgnoreCase("None") || type.equals("false")) {
+                return; // Rule is disabled, allow portal creation
+            }
+            if (type.equalsIgnoreCase(entityTypeName) || 
+                type.equalsIgnoreCase("All") || 
+                type.equals("true")) {
                 // Return NO_OP to prevent teleportation instead of creating a new portal
                 cir.setReturnValue(TeleportTarget.NO_OP);
                 return;
