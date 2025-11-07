@@ -55,11 +55,11 @@ public abstract class NetherPortalBlockMixin {
         String settingValue = CCASettings.DisallowEntityCreateNeatherPortalFrame.trim();
         
         // Handle special cases first
-        if (settingValue.equalsIgnoreCase("None") || settingValue.equals("false")) {
+        if (settingValue.equalsIgnoreCase("None") || settingValue.equalsIgnoreCase("false")) {
             return; // Rule is disabled, allow portal creation
         }
         
-        if (settingValue.equalsIgnoreCase("All") || settingValue.equals("true")) {
+        if (settingValue.equalsIgnoreCase("All") || settingValue.equalsIgnoreCase("true")) {
             cir.setReturnValue(TeleportTarget.NO_OP); // Block all entities
             return;
         }
