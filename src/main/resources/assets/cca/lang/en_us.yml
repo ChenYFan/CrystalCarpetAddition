@@ -17,6 +17,14 @@ cca:
         When this option is turned on, the comparator ignores state updates from below
         Means that opening the trap gate will not destroy the comparator
 
+    DisallowEntityCreateNeatherPortalFrame:
+      desc: |-
+        Prevents specified entities from creating nether portal frames when traveling through portals
+        If there is no portal in the destination dimension, teleportation will be refused
+        Valid values: None, All, or Minecraft entity types (e.g., Player, Item, Villager)
+        Multiple entity types can be separated by commas, e.g., "Player,Item"
+      extra.0: Reverts to pre-1.21.2 behavior where entities don't automatically create portals
+
     EnderDragonPartCanUseEndPortal:
       desc: Allow ender dragon part to pass through end portal
 

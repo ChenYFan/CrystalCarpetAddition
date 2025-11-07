@@ -19,6 +19,15 @@ cca:
         开启此选项后, 比较器会忽略来自下方的状态更新
         意味着开启活板门不会破坏比较器
 
+    DisallowEntityCreateNeatherPortalFrame:
+      name: 禁止实体创建地狱门框架
+      desc: |-
+        阻止指定实体在穿越地狱门时创建另一个维度对应的门框架
+        如果对应维度没有门则拒绝传送
+        可选值: None, All, 或Minecraft允许的实体类型(例如Player、Item、Villager)
+        可以用逗号分隔多个实体类型，例如"Player,Item"
+      extra.0: 回退1.21.2之前的行为，防止实体自动创建地狱门
+
     EnderDragonPartCanUseEndPortal:
       name: 末影龙部件可使用末地传送门
       desc: 允许末影龙的部件通过末地传送门
