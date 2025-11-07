@@ -45,7 +45,7 @@ public class CCASettings {
     public static boolean ComparatorIgnoresStateUpdatesFromBelow = false;
 
     @Rule(categories = {CCA, MC_TWEAKS})
-    public static String DisallowEntityCreateNeatherPortalFrame = "None";
+    public static String DisallowEntityCreateNetherPortalFrame = "None";
 
     @Rule(categories = {CCA, MC_TWEAKS})
     public static boolean EnderDragonPartCanUseEndPortal = false;

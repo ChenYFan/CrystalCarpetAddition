@@ -19,7 +19,7 @@ cca:
         开启此选项后, 比较器会忽略来自下方的状态更新
         意味着开启活板门不会破坏比较器
 
-    DisallowEntityCreateNeatherPortalFrame:
+    DisallowEntityCreateNetherPortalFrame:
       name: 禁止实体创建地狱门框架
       desc: |-
         阻止指定实体在穿越地狱门时创建另一个维度对应的门框架

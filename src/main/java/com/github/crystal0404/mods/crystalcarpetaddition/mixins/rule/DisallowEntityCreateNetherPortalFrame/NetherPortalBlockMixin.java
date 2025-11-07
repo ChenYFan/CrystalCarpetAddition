@@ -18,7 +18,7 @@
  * along with Crystal Carpet Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.crystal0404.mods.crystalcarpetaddition.mixins.rule.DisallowEntityCreateNeatherPortalFrame;
+package com.github.crystal0404.mods.crystalcarpetaddition.mixins.rule.DisallowEntityCreateNetherPortalFrame;
 
 import com.github.crystal0404.mods.crystalcarpetaddition.CCASettings;
 import net.minecraft.block.NetherPortalBlock;
@@ -52,7 +52,7 @@ public abstract class NetherPortalBlockMixin {
             return;
         }
 
-        String settingValue = CCASettings.DisallowEntityCreateNeatherPortalFrame.trim();
+        String settingValue = CCASettings.DisallowEntityCreateNetherPortalFrame.trim();
         
         // Handle special cases first
         if (settingValue.equalsIgnoreCase("None") || settingValue.equalsIgnoreCase("false")) {

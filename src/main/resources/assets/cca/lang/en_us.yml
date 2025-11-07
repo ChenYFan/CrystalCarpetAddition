@@ -17,7 +17,7 @@ cca:
         When this option is turned on, the comparator ignores state updates from below
         Means that opening the trap gate will not destroy the comparator
 
-    DisallowEntityCreateNeatherPortalFrame:
+    DisallowEntityCreateNetherPortalFrame:
       desc: |-
         Prevents specified entities from creating nether portal frames when traveling through portals
         If there is no portal in the destination dimension, teleportation will be refused
