@@ -25,16 +25,11 @@ import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.TeleportTarget;
-import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.dimension.NetherPortal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Optional;
 
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
@@ -57,17 +52,24 @@ public abstract class NetherPortalBlockMixin {
             return;
         }
 
+        String settingValue = CCASettings.DisallowEntityCreateNeatherPortalFrame.trim();
+        
+        // Handle special cases first
+        if (settingValue.equalsIgnoreCase("None") || settingValue.equals("false")) {
+            return; // Rule is disabled, allow portal creation
+        }
+        
+        if (settingValue.equalsIgnoreCase("All") || settingValue.equals("true")) {
+            cir.setReturnValue(TeleportTarget.NO_OP); // Block all entities
+            return;
+        }
+
+        // Check if entity type matches any in the comma-separated list
         String entityTypeName = entity.getType().getName().getString();
-        String[] disallowedEntityTypes = CCASettings.DisallowEntityCreateNeatherPortalFrame.split(",");
+        String[] disallowedEntityTypes = settingValue.split(",");
 
         for (String type : disallowedEntityTypes) {
-            String trimmedType = type.trim();
-            if (trimmedType.equalsIgnoreCase("None") || trimmedType.equals("false")) {
-                return;
-            }
-            if (trimmedType.equalsIgnoreCase(entityTypeName) || 
-                trimmedType.equalsIgnoreCase("All") || 
-                trimmedType.equals("true")) {
+            if (type.trim().equalsIgnoreCase(entityTypeName)) {
                 // Return NO_OP to prevent teleportation instead of creating a new portal
                 cir.setReturnValue(TeleportTarget.NO_OP);
                 return;
