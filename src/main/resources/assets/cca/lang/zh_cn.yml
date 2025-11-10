@@ -83,3 +83,6 @@ cca:
     RemoveHighSpeedPearlsTime:
       name: 移除高速珍珠时间
       desc: 设置高速运动珍珠的存活时间
+    OnlyPlayerCanCreateNeatherPortalFrame:
+      name: 只有玩家可以创建下界传送门框架
+      desc: 只有玩家可以创建下界传送门框架

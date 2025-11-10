@@ -64,3 +64,6 @@ cca:
 
     RemoveHighSpeedPearlsTime:
       desc: Set the survival time of high-speed moving pearls
+
+    OnlyPlayerCanCreateNeatherPortalFrame:
+      desc: Only players can create Nether Portal Frames

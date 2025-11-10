@@ -2,7 +2,7 @@
  * This file is part of the Crystal Carpet Addition project, licensed under the
  * GNU General Public License v3.0
  *
- * Copyright (C) 2024  Crystal0404 and contributors
+ * Copyright (C) 2025  Crystal0404 and contributors
  *
  * Crystal Carpet Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ public abstract class NetherPortalMixin {
             BlockPos pos,
             boolean destIsNether,
             Direction.Axis portalAxis,
-            CallbackInfoReturnable<NetherPortal.Target> cir
+            CallbackInfoReturnable<NetherPortal> cir
     ) {
         if (CCASettings.OnlyPlayerCanCreateNeatherPortalFrame) {
             Entity entity = cca$teleportingEntity.get();
