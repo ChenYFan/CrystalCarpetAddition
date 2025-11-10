@@ -83,6 +83,8 @@ cca:
     RemoveHighSpeedPearlsTime:
       name: 移除高速珍珠时间
       desc: 设置高速运动珍珠的存活时间
+      
     OnlyPlayerCanCreateNeatherPortalFrame:
       name: 只有玩家可以创建下界传送门框架
-      desc: 只有玩家可以创建下界传送门框架
+      desc: 防止非玩家实体创建下界传送门导致极少数情况下串门
+      extra.0: Ojang不要再在1.21.6串我的门了

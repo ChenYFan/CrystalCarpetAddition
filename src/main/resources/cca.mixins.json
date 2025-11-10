@@ -15,7 +15,7 @@
     "rule.GatewayCannotLoadingChunks.EndGatewayBlockMixin",
     "rule.ItemShadowing.ScreenHandlerMixin",
     "rule.NoBatSpwan.BatEntityMixin",
-    "rule.OnlyPlayerCanCreateNeatherPortalFrame.NetherPortalMixin",
+    "rule.OnlyPlayerCanCreateNeatherPortalFrame.NetherPortalBlockMixin",
     "rule.ReIntroduceOldVersionRaid.BadOmenStatusEffectMixin",
     "rule.ReIntroduceOldVersionRaid.RaiderEntityMixin",
     "rule.ReIntroduceOldVersionRaid.RaidMixin",
